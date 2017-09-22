@@ -1,0 +1,486 @@
+/* =======================================================================
+      Général
+      =========================================================================  */
+.entry-content > .widget-event-list > a,
+.entry-content > .widget-event-list > a:focus,
+.entry-content > .widget-event-list > a:hover,
+.event-list > li > a,
+.event-list > li > a:focus,
+.event-list > li > a:hover {
+    text-decoration: none;
+    box-shadow: none;
+}
+
+.em-header {
+    text-align: center;
+}
+
+.em-a,
+.em-a:focus,
+.em-a:hover {
+    text-decoration: none !important;
+    box-shadow: none !important;
+    color: inherit;
+}
+
+.em-flex {
+    display: flex;
+}
+
+.em-auto {
+    margin: auto;
+}
+
+.flex-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.align-vertical-flex {
+    margin: auto 0;
+}
+
+.em-link-all {
+    float: right;
+    font-size: 1.6em;
+}
+
+.em-h2 {
+    font-size: 4.5em;
+}
+
+.em-archive {
+    margin: 2vh 2vw;
+}
+
+.em-archive-title {
+    margin: 2vh 1vw;
+}
+
+.em-no-padding {
+    padding: 0;
+}
+
+.carousel-caption {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 80px;
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #000;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.carousel-inner {
+    height: 350px;
+}
+
+.em-slider-div,
+.em-slider-span {
+    margin: 5px;
+}
+
+.em-h1 {
+    font-size: 6em;
+}
+
+.em-h3 {
+    font-size: 3em;
+    margin: 0 0 0.75em;
+}
+
+.em-p {
+    font-size: 1.4em;
+}
+
+.em-archive-description {
+    height: 3em;
+}
+
+.em-slider-img {
+    height: 100% !important;
+}
+
+.em-single {
+    font-size: 1.4em;
+}
+
+.em-single-info {
+    margin: 3vh 3vw;
+    padding: 10px 0;
+}
+
+.em-single-head {
+    display: flex;
+}
+
+.em-single-title {
+    padding-left: 3vw;
+    margin: auto;
+}
+
+.thumbnail-image {
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.thumbnail-image > img {
+    width: 100%;
+    height: 40%;
+}
+
+.em-calendar-select {
+    margin: auto;
+}
+
+.em-calendar-select > select {
+    width: auto;
+    display: inline;
+}
+
+.em-calendar-head {
+    display: flex;
+    margin: 5vh 0;
+}
+
+.em-calendar {
+    margin: 5vh 5vw;
+}
+
+.em-calendar-day {
+    margin: 1vw 1vw 0 1vw;
+    font-size: 1.4em;
+    display: flex;
+}
+
+.em-calendar-boxday {
+    color: #ef7b3e;
+}
+
+.em-calendar-boxday-current {
+    color: #fff;
+}
+
+.em-calendar-boxday,
+.em-calendar-boxday-current {
+    position: relative;
+    min-height: 100px;
+    height: 10vw
+}
+
+.em-th,
+.em-td {
+    width: 10%;
+    text-align: center;
+}
+
+.em-td {
+    border: 1px solid #b7aaaa;
+}
+
+.em-calendar-current-day {
+    background: #ef7b3e;
+}
+
+.em-calendar-hour {
+    font-size: 0.8em;
+    margin: 5px auto;
+    background: #245ad8;
+    color: #fff;
+}
+
+.em-calendar-title-event {
+    margin: auto;
+}
+
+.em-calendar-event {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+}
+
+/* =======================================================================
+      Liste événement
+      ======================================================================= */
+
+.event {
+    display: flex;
+    flex: 1;
+    min-height: 10em;
+}
+
+.event-list {
+    display: inline;
+    list-style: none;
+    margin: 20px 0;
+}
+
+.event-list > li {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.event-list > li:hover,
+.event-list > li:focus,
+.event-list > li:active {
+    /*box-shadow: 7px 4px 15px 5px;*/
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
+}
+
+.event-month-list,
+.event-day-list,
+.event-date-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.event-date-list {
+    padding: 0;
+    color: #fff;
+    text-align: center;
+}
+
+.event-content-list,
+.event-content-list:hover {
+    padding-left: 20px;
+    color: #1a1a1a;
+}
+
+.event-day-list {
+    font-size: 38px;
+    background-color: #1a1a1a;
+}
+
+.event-month-list {
+    max-height: 40px;
+    font-size: 18px;
+    background-color: #ef7b3e;
+}
+
+.event-title-list > h4,
+.event-text-list > p {
+    margin: 0;
+}
+
+.event-hour-list,
+.event-place-list {
+    font-size: 12px;
+}
+
+.event-text-list {
+    font-size: 15px;
+}
+
+.events-sidebar {
+    padding: 0 20px 0 20px;
+    margin-right: 40px;
+    margin-left: 10px;
+}
+
+/*If cancelled */
+
+.em-cancel-event {
+    opacity: 0.5;
+}
+
+.em-badge-list {
+    float: right;
+    text-align: center;
+    padding: 0 5px;
+    border-radius: 4px;
+}
+
+.em-status {
+    background-color: #238e30;
+    color: #fff;
+}
+
+.em-cancel {
+    background-color: #a20202;
+    color: #fff;
+}
+
+.special-cancel {
+    float: left;
+}
+
+.event-hour-list {
+    display: inline-block;
+}
+
+/* =======================================================================
+    Single Event
+    ======================================================================= */
+
+.em-single-detail {
+    text-align: center;
+    margin: auto;
+}
+
+.em-single-content {
+    margin: 2vh 3vw;
+}
+
+/*If cancelled*/
+
+.em-single-cancel-info {
+    padding: .75rem 1.25rem;
+    margin: 3vh 3vw;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+}
+
+.em-single-cancel-info > p {
+    margin: 0;
+    padding: 10px 20px;
+}
+
+/* ==========================================================================
+Page Evenement
+========================================================================== */
+
+.thumbnail {
+    border: 1px solid transparent;
+    margin: 20px 10px;
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
+    /*box-shadow: 4px 3px 9px 3px;*/
+    border-radius: 4px;
+    color: #353232;
+}
+
+.caption {
+    margin: 0 2vh;
+    display: table;
+}
+
+.caption > p > span {
+    margin-left: 10px;
+}
+
+.em-empty {
+    margin: auto;
+    font-size: 3em;
+    padding: 0 20px;
+}
+
+.fa {
+    width: 10px;
+    margin: 0 5px;
+}
+
+.caption > p {
+    margin: 0px 0 0.75em;
+    font-size: 1.4em;
+}
+
+.caption > p > i {
+    color: #ef7b3e;
+}
+
+.caption > h3 {
+    color: #ef7b3e;
+}
+
+.event-cancel-label {
+    position: absolute;
+    top: 45%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    background: #8a6d3b;
+    color: #fff;
+    border-radius: 4px;
+    padding: 0 10px;
+    margin: 0 10px;
+}
+
+.em-archive-cancel {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 5em;
+    padding: 0 20px;
+}
+
+.event-cancel {
+    float: left;
+    margin-left: 40px;
+}
+
+.attachment-thumbnail {
+    margin: auto;
+}
+
+/* Grow */
+.hvr-grow {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px transparent;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+}
+
+.hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+}
+
+/* Back Pulse */
+@-webkit-keyframes hvr-back-pulse {
+    50% {
+        background-color: rgba(239, 123, 62, 0.75);
+    }
+}
+
+@keyframes hvr-back-pulse {
+    50% {
+        background-color: rgba(239, 123, 62, 0.75));
+    }
+}
+
+.hvr-back-pulse {
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px transparent;
+    overflow: hidden;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    -webkit-transition-property: color, background-color;
+    transition-property: color, background-color;
+}
+
+.hvr-back-pulse:hover, .hvr-back-pulse:focus, .hvr-back-pulse:active {
+    -webkit-animation-name: hvr-back-pulse;
+    animation-name: hvr-back-pulse;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-delay: 0.5s;
+    animation-delay: 0.5s;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    background-color: #ef7b3e;
+    background-color: #ef7b3e;
+    color: white;
+}
+
+.em-calendar-current:hover {
+    background-color: #fff;
+    color: #ef7b3e;
+}
