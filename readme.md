@@ -1,6 +1,6 @@
 # Event Manager
 
-##FR
+## FR
 
    Contributeurs: Laurent-Panek 
     
@@ -64,7 +64,7 @@
     * Optimisation de l'aide et de la documentation  
     
     
-####Changelog :
+#### Changelog :
 
 = 1.0.0 =
 
@@ -82,7 +82,7 @@
 * Settings:  Ajout d'un champs pour modifier le nombre maximum d'événement dans le widget
 
 
-##ENG
+## ENG
 
 Contributors: Laurent-Panek 
     
@@ -146,7 +146,7 @@ Contributors: Laurent-Panek
     * Optimization of help and documentation 
     
 
-####Changelog :
+#### Changelog :
 
 = 1.0.0 =
 
