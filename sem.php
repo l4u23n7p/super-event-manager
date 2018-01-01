@@ -1,11 +1,11 @@
 <?php
 /*
-Plugin Name: Event Manager
+Plugin Name: Super Event Manager
 Plugin URI:
 Description: Gérer vos événements avec ce plugin.
-Author: Dotwiz
-Author URI: http://dotwiz.fr/
-Version: 1.0
+Author: Laurent Panek
+Author URI: https://laurentpanek.me/
+Version: 1.0.1
 */
 
 
@@ -13,13 +13,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
 
-if ( ! class_exists( 'EventManager' ) ) :
+if ( ! class_exists( 'SuperEventManager' ) ) :
 
 	/**
 	 * Classe principale du plugin
 	 */
-	class EventManager {
-		var $version = '1.0.0';
+	class SuperEventManager {
+		var $version = '1.0.1';
+
+		var $settings = array();
 
 		/**
 		 * Constructeur de la classe EventManager
@@ -39,10 +41,10 @@ if ( ! class_exists( 'EventManager' ) ) :
 		 * @return
 		 */
 		function load_plugin() {
-			if ( get_option( 'event_manager_load' ) == 'can_load' ) {
+			if ( get_option( 'sem_load' ) == 'can_load' ) {
 				$this->initialize();
 			} else if ( is_admin() ) {
-				update_option( 'event_manager_admin_notices', $this->notice_warning_acf() );
+				update_option( 'sem_admin_notices', $this->notice_warning_acf() );
 			}
 		}
 
@@ -67,15 +69,15 @@ if ( ! class_exists( 'EventManager' ) ) :
 				}
 			}
 			if ( is_plugin_inactive( $acf ) && get_option( 'acf_version' ) < '5.6.0' ) {
-				update_option( 'event_manager_admin_notices', $this->notice_warning_acf() );
+				update_option( 'sem_admin_notices', $this->notice_warning_acf() );
 			} else {
-				update_option( 'event_manager_load', 'can_load' );
-				update_option( 'event_manager_admin_notices', $this->notice_install() );
-				if ( ! get_option( 'event_manager_flag' ) ) {
-					update_option( 'event_manager_flag', true );
+				update_option( 'sem_load', 'can_load' );
+				update_option( 'sem_admin_notices', $this->notice_install() );
+				if ( ! get_option( 'sem_flag' ) ) {
+					update_option( 'sem_flag', true );
 				}
-				if ( ! get_option( 'event_manager_default_settings' ) ) {
-					update_option( 'event_manager_default_settings', true );
+				if ( ! get_option( 'sem_default_settings' ) ) {
+					update_option( 'sem_default_settings', true );
 				}
 				$this->load_plugin();
 
@@ -91,7 +93,7 @@ if ( ! class_exists( 'EventManager' ) ) :
 		 * @return
 		 */
 		function plugin_deactivation( $network_wide ) {
-			delete_option( 'event_manager_load' );
+			delete_option( 'sem_load' );
 			unregister_post_type( 'event' );
 			$this->delete_acf_fields();
 			$this->deregister_style();
@@ -105,9 +107,9 @@ if ( ! class_exists( 'EventManager' ) ) :
 		 */
 		function delete_acf_fields() {
 			if ( function_exists( 'acf_remove_local_field_group' ) ) {
-				acf_remove_local_field_group( 'group_event_manager' );
-				acf_remove_local_field_group( 'group_event_manager_slider' );
-				acf_remove_local_field_group( 'group_event_manager_settings' );
+				acf_remove_local_field_group( 'group_sem' );
+				acf_remove_local_field_group( 'group_sem_slider' );
+				acf_remove_local_field_group( 'group_sem_settings' );
 			}
 		}
 
@@ -117,13 +119,13 @@ if ( ! class_exists( 'EventManager' ) ) :
 		 * @return
 		 */
 		function deregister_style() {
-			wp_deregister_style( 'event-manager-default-design' );
-			wp_deregister_style( 'event-manager-custom-design' );
+			wp_deregister_style( 'sem-default-design' );
+			wp_deregister_style( 'sem-custom-design' );
 			wp_deregister_style( 'font-awesome' );
 			wp_deregister_style( 'bootstrap-css' );
 			wp_deregister_script( 'bootstrap-js' );
-			wp_deregister_script( 'event-manager-custom-main' );
-			wp_deregister_script( 'event-manager-calendar' );
+			wp_deregister_script( 'sem-custom-main' );
+			wp_deregister_script( 'sem-calendar' );
 		}
 
 		/**
@@ -132,11 +134,11 @@ if ( ! class_exists( 'EventManager' ) ) :
 		 * @return
 		 */
 		function admin_notices() {
-			$notices = get_option( 'event_manager_admin_notices' );
+			$notices = get_option( 'sem_admin_notices' );
 			if ( $notices ) {
 				echo $notices;
 			}
-			delete_option( 'event_manager_admin_notices', '' );
+			delete_option( 'sem_admin_notices', '' );
 		}
 
 		/**
@@ -148,7 +150,7 @@ if ( ! class_exists( 'EventManager' ) ) :
 
 			$message = '
 	<div class="notice notice-error is-dismissible">
-		<p>Erreur Event Manager ! Advanced Custom Fields PRO 5.6.0 (ou supérieur) est requise à l\'éxécution de ce plugin.</p>
+		<p>Erreur Super Event Manager ! Advanced Custom Fields PRO 5.6.0 (ou supérieur) est requise à l\'éxécution de ce plugin.</p>
 	</div>';
 
 			return $message;
@@ -162,14 +164,14 @@ if ( ! class_exists( 'EventManager' ) ) :
 		function notice_install() {
 			$message = '
 	<div class="notice notice-success is-dismissible">
-		<p>Vous pouvez utilisé Event Manager.</p>
+		<p>Vous pouvez utilisé Super Event Manager.</p>
 	</div>';
 
 			return $message;
 		}
 
 		function default_settings() {
-			if ( get_option( 'event_manager_default_settings' ) ) {
+			if ( get_option( 'sem_default_settings' ) ) {
 
 				$default_value = array(
 					'template' => array(
@@ -205,15 +207,15 @@ if ( ! class_exists( 'EventManager' ) ) :
 				update_row('custom', 1, $default_value['custom'], 'options');
 
 
-				delete_option( 'event_manager_default_settings' );
+				delete_option( 'sem_default_settings' );
 
 			}
 		}
 
 		function flush_rules_maybe() {
-			if ( get_option( 'event_manager_flag' ) ) {
+			if ( get_option( 'sem_flag' ) ) {
 				flush_rewrite_rules();
-				delete_option( 'event_manager_flag' );
+				delete_option( 'sem_flag' );
 			}
 		}
 
@@ -227,7 +229,7 @@ if ( ! class_exists( 'EventManager' ) ) :
 			// vars plugin
 			$this->settings = array(
 				// basic
-				'name'     => __( 'Event Manager', 'EventManager' ),
+				'name'     => __( 'Super Event Manager', 'SuperEventManager' ),
 				'version'  => $this->version,
 
 				// urls
@@ -241,25 +243,25 @@ if ( ! class_exists( 'EventManager' ) ) :
 				'show_admin' => true,
 			);
 
-			$this->define( 'EVENT_MANAGER_PATH', $this->settings['path'] );
+			$this->define( 'SEM_PATH', $this->settings['path'] );
 
-			include_once( EVENT_MANAGER_PATH . 'core/event-manager-helpers.php' );
+			include_once( SEM_PATH . 'core/sem-helpers.php' );
 
-			event_manager_include( 'core/event-manager-api.php' );
-			event_manager_include( 'core/event-manager-display-widget.php' );
-			event_manager_include( 'core/event-manager-display-slider.php' );
-			event_manager_include( 'core/event-manager-template.php' );
-			event_manager_include( 'core/event-manager-calendar.php' );
+			sem_include( 'core/sem-api.php' );
+			sem_include( 'core/sem-display-widget.php' );
+			sem_include( 'core/sem-display-slider.php' );
+			sem_include( 'core/sem-template.php' );
+			sem_include( 'core/sem-calendar.php' );
 
 			// admin
 			if ( is_admin() ) {
 
 				// include admin
-				event_manager_include( 'core/event-manager-custom.php' );
-				event_manager_include( 'admin/event-manager-admin.php' );
-				event_manager_include( 'admin/event-manager-admin-slider.php' );
-				event_manager_include( 'admin/event-manager-admin-settings.php' );
-				event_manager_include( 'admin/event-manager-admin-help.php' );
+				sem_include( 'core/sem-custom.php' );
+				sem_include( 'admin/sem-admin.php' );
+				sem_include( 'admin/sem-admin-slider.php' );
+				sem_include( 'admin/sem-admin-settings.php' );
+				sem_include( 'admin/sem-admin-help.php' );
 			}
 
 			// actions
@@ -286,7 +288,7 @@ if ( ! class_exists( 'EventManager' ) ) :
 			if ( function_exists( 'acf_add_local_field_group' ) ) {
 
 				acf_add_local_field_group( array(
-					'key'                   => 'group_event_manager_slider',
+					'key'                   => 'group_sem_slider',
 					'title'                 => 'Event Slider',
 					'fields'                => array(
 						array(
@@ -480,7 +482,7 @@ if ( ! class_exists( 'EventManager' ) ) :
 							array(
 								'param'    => 'options_page',
 								'operator' => '==',
-								'value'    => 'event-manager-slider',
+								'value'    => 'sem-slider',
 							),
 						),
 					),
@@ -495,9 +497,25 @@ if ( ! class_exists( 'EventManager' ) ) :
 				) );
 
 				acf_add_local_field_group( array(
-					'key'                   => 'group_event_manager_settings',
+					'key'                   => 'group_sem_settings',
 					'title'                 => 'Paramètres',
 					'fields'                => array(
+						array(
+							'key' => 'field_tab_general',
+							'label' => 'General',
+							'name' => '',
+							'type' => 'tab',
+							'instructions' => '',
+							'required' => 0,
+							'conditional_logic' => 0,
+							'wrapper' => array(
+								'width' => '',
+								'class' => '',
+								'id' => '',
+							),
+							'placement' => 'top',
+							'endpoint' => 0,
+						),
 						array(
 							'key'               => 'field_settings_template',
 							'label'             => 'Template',
@@ -767,6 +785,22 @@ if ( ! class_exists( 'EventManager' ) ) :
 							),
 						),
 						array(
+							'key' => 'field_tab_custom',
+							'label' => 'Custom',
+							'name' => '',
+							'type' => 'tab',
+							'instructions' => '',
+							'required' => 0,
+							'conditional_logic' => 0,
+							'wrapper' => array(
+								'width' => '',
+								'class' => '',
+								'id' => '',
+							),
+							'placement' => 'top',
+							'endpoint' => 0,
+						),
+						array(
 							'key'               => 'field_settings_custom',
 							'label'             => 'Customisation',
 							'name'              => 'custom',
@@ -926,13 +960,45 @@ if ( ! class_exists( 'EventManager' ) ) :
 								),
 							),
 						),
+						array(
+							'key' => 'field_tab_colors',
+							'label' => 'Colors',
+							'name' => '',
+							'type' => 'tab',
+							'instructions' => '',
+							'required' => 0,
+							'conditional_logic' => 0,
+							'wrapper' => array(
+								'width' => '',
+								'class' => '',
+								'id' => '',
+							),
+							'placement' => 'top',
+							'endpoint' => 0,
+						),
+						array(
+							'key' => 'field_tab_others',
+							'label' => 'Others ?',
+							'name' => '',
+							'type' => 'tab',
+							'instructions' => '',
+							'required' => 0,
+							'conditional_logic' => 0,
+							'wrapper' => array(
+								'width' => '',
+								'class' => '',
+								'id' => '',
+							),
+							'placement' => 'top',
+							'endpoint' => 0,
+						),
 					),
 					'location'              => array(
 						array(
 							array(
 								'param'    => 'options_page',
 								'operator' => '==',
-								'value'    => 'event-manager-settings',
+								'value'    => 'sem-settings',
 							),
 						),
 					),
@@ -957,11 +1023,11 @@ if ( ! class_exists( 'EventManager' ) ) :
 		function create_acf_fields_event() {
 			if ( function_exists( 'acf_add_local_field_group' ) ) {
 				acf_add_local_field_group( array(
-					'key'                   => 'group_event_manager',
+					'key'                   => 'group_sem',
 					'title'                 => 'Informations événement',
 					'fields'                => array(
 						array(
-							'key'               => 'field_event_manager_1',
+							'key'               => 'field_sem_1',
 							'label'             => 'Date de début',
 							'name'              => 'event_date_start',
 							'type'              => 'date_time_picker',
@@ -978,7 +1044,7 @@ if ( ! class_exists( 'EventManager' ) ) :
 							'first_day'         => 1,
 						),
 						array(
-							'key'               => 'field_event_manager_2',
+							'key'               => 'field_sem_2',
 							'label'             => 'Date de Fin',
 							'name'              => 'event_date_end',
 							'type'              => 'date_time_picker',
@@ -995,7 +1061,7 @@ if ( ! class_exists( 'EventManager' ) ) :
 							'first_day'         => 1,
 						),
 						array(
-							'key'               => 'field_event_manager_3',
+							'key'               => 'field_sem_3',
 							'label'             => 'Lieu',
 							'name'              => 'event_place',
 							'type'              => 'text',
@@ -1015,7 +1081,7 @@ if ( ! class_exists( 'EventManager' ) ) :
 							'maxlength'         => 40,
 						),
 						array(
-							'key'               => 'field_event_manager_4',
+							'key'               => 'field_sem_4',
 							'label'             => 'Description de l\'événement',
 							'name'              => 'event_description',
 							'type'              => 'textarea',
@@ -1034,7 +1100,7 @@ if ( ! class_exists( 'EventManager' ) ) :
 							'new_lines'         => 'br',
 						),
 						array(
-							'key'               => 'field_event_manager_5',
+							'key'               => 'field_sem_5',
 							'label'             => 'Événement important ?',
 							'name'              => 'event_priority',
 							'type'              => 'true_false',
@@ -1053,7 +1119,7 @@ if ( ! class_exists( 'EventManager' ) ) :
 							'ui_off_text'       => '',
 						),
 						array(
-							'key'               => 'field_event_manager_6',
+							'key'               => 'field_sem_6',
 							'label'             => 'Annuler l\'événement ?',
 							'name'              => 'event_cancel',
 							'type'              => 'true_false',
@@ -1072,7 +1138,7 @@ if ( ! class_exists( 'EventManager' ) ) :
 							'ui_off_text'       => '',
 						),
 						array(
-							'key'               => 'field_event_manager_7',
+							'key'               => 'field_sem_7',
 							'label'             => 'Raison de l\'annulation',
 							'name'              => 'event_cancel_reason',
 							'type'              => 'text',
@@ -1081,7 +1147,7 @@ if ( ! class_exists( 'EventManager' ) ) :
 							'conditional_logic' => array(
 								array(
 									array(
-										'field'    => 'field_event_manager_6',
+										'field'    => 'field_sem_6',
 										'operator' => '==',
 										'value'    => '1',
 									),
@@ -1343,14 +1409,14 @@ if ( ! class_exists( 'EventManager' ) ) :
 		 */
 		function register_assets() {
 			wp_register_script( 'bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', array( 'jquery' ), null );
-			wp_register_script( 'event-manager-custom-main', event_manager_get_dir( 'assets/js/event-manager-custom-main.js' ), array( 'jquery' ), $this->version );
-			wp_register_script( 'event-manager-calendar', event_manager_get_dir( 'assets/js/event-manager-calendar.js' ), array( 'jquery' ), $this->version );
+			wp_register_script( 'sem-custom-main', sem_get_dir( 'assets/js/sem-custom-main.js' ), array( 'jquery' ), $this->version );
+			wp_register_script( 'sem-calendar', sem_get_dir( 'assets/js/sem-calendar.js' ), array( 'jquery' ), $this->version );
 
-			wp_register_style( 'event-manager-default-design', event_manager_get_dir( 'assets/css/event-manager-default-design.css' ), array(), $this->version );
-			wp_register_style( 'event-manager-admin-design', event_manager_get_dir( 'assets/css/event-manager-admin-design.css' ), array(), $this->version );
-			wp_register_style( 'font-awesome', event_manager_get_dir( 'assets/css/font-awesome-4.7.0/css/font-awesome.min.css' ), array(), $this->version );
+			wp_register_style( 'sem-default-design', sem_get_dir( 'assets/css/sem-default-design.css' ), array(), $this->version );
+			wp_register_style( 'sem-admin-design', sem_get_dir( 'assets/css/sem-admin-design.css' ), array(), $this->version );
+			wp_register_style( 'font-awesome', sem_get_dir( 'assets/css/font-awesome-4.7.0/css/font-awesome.min.css' ), array(), $this->version );
 			wp_register_style( 'bootstrap-css', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', array(), null );
-			wp_register_style( 'event-manager-custom-design', event_manager_get_dir( 'assets/css/event-manager-custom-design.css' ), array(), $this->version );
+			wp_register_style( 'sem-custom-design', sem_get_dir( 'assets/css/sem-custom-design.css' ), array(), $this->version );
 
 		}
 
@@ -1363,20 +1429,20 @@ if ( ! class_exists( 'EventManager' ) ) :
 			wp_enqueue_script( 'bootstrap-js' );
 			wp_enqueue_style( 'bootstrap-css' );
 
-			wp_enqueue_style( 'event-manager-default-design' );
+			wp_enqueue_style( 'sem-default-design' );
 			wp_enqueue_style( 'font-awesome' );
 
 			$custom   = get_event_settings( 'custom' );
 			$template = get_event_settings( 'template' );
 
 			if ( ! empty( $custom['custom_css'] ) ) {
-				wp_enqueue_style( 'event-manager-custom-design' );
+				wp_enqueue_style( 'sem-custom-design' );
 			}
 			if ( ! empty( $custom['custom_js'] ) ) {
-				wp_enqueue_script( 'event-manager-custom-main' );
+				wp_enqueue_script( 'sem-custom-main' );
 			}
 			if ( $template['archive_template']['value'] == 'calendar' && is_archive( 'event' ) ) {
-				wp_enqueue_script( 'event-manager-calendar' );
+				wp_enqueue_script( 'sem-calendar' );
 			}
 		}
 
@@ -1434,25 +1500,25 @@ if ( ! class_exists( 'EventManager' ) ) :
 
 	/**
 	 * Fonction principale du plugin, garantissant une seule instance de la classe principale
-	 * @method event_manager
+	 * @method sem
 	 * @return
 	 */
-	function event_manager() {
-		global $event_manager;
+	function sem() {
+		global $sem;
 
-		if ( ! isset( $event_manager ) ) {
+		if ( ! isset( $sem ) ) {
 
-			$event_manager = new EventManager();
+			$sem = new SuperEventManager();
 
-			$event_manager->load_plugin();
+			$sem->load_plugin();
 
 		}
 
-		return $event_manager;
+		return $sem;
 	}
 
 // initialize
-	event_manager();
+	sem();
 
 
 endif; // class_exists check

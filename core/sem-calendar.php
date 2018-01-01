@@ -3,9 +3,9 @@
 /**
  * Classe regroupant les méthodes nécessaires à l'affichage du calendrier
  */
-class EventManagerCalendar {
+class SuperEventManagerCalendar {
 	/**
-	 * Constructeur de la classe EventManagerCalendar
+	 * Constructeur de la classe SuperEventManagerCalendar
 	 * Vide pour le moment
 	 * @method __construct
 	 */

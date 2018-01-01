@@ -3,10 +3,10 @@
 /**
  * Classe regroupant les méthodes nécessaires à l'affichage du widget
  */
-class EventManagerDisplayWidget {
+class SuperEventManagerDisplayWidget {
 
 	/**
-	 * Constructeur de la classe EventManagerDisplayWidget
+	 * Constructeur de la classe SuperEventManagerDisplayWidget
 	 * Ajout du shortcode pour afficher le widget
 	 * @method __construct
 	 */
@@ -39,13 +39,13 @@ class EventManagerDisplayWidget {
 				),
 			)
 		);
-		$string    = '<div class="widget-event-list"><h2 class="em-h2">Dernier ' . get_archive_event_title() . '</h2><ul class="event-list">';
+		$string    = '<div class="widget-event-list"><h2 class="sem-h2">Dernier ' . get_archive_event_title() . '</h2><ul class="event-list">';
 		if ( $the_query->have_posts() ) {
 			while ( $the_query->have_posts() ) {
 				$the_query->the_post();
 
 				if ( get_field( 'event_cancel' ) ) {
-					$string .= '<li class="hvr-grow em-cancel-event"><a href="' . get_the_permalink() . '">';
+					$string .= '<li class="hvr-grow sem-cancel-event"><a href="' . get_the_permalink() . '">';
 				} else {
 					$string .= '<li class="hvr-grow"><a href="' . get_the_permalink() . '">';
 				}
@@ -53,12 +53,12 @@ class EventManagerDisplayWidget {
 				$string .= '<div class="event-day-list"><span> ' . get_event_day( get_field( 'event_date_start' ) ) . '</span></div>';
 				$string .= '<div class="event-month-list"><span> ' . get_event_month( get_field( 'event_date_start' ) ) . '</span></div></div>';
 				$string .= '<div class="col-md-9 flex-list event-content-list">';
-				$string .= '<div class="align-vertical-flex event-title-list"><div class="em-no-padding col-md-8"><h4>' . get_the_title() . '</h4></div>';
+				$string .= '<div class="align-vertical-flex event-title-list"><div class="sem-no-padding col-md-8"><h4>' . get_the_title() . '</h4></div>';
 				if ( get_post_status( get_the_ID() ) == 'ongoing' ) {
-					$string .= '<div class="col-md-4 em-badge-list em-status"><span>Événement en cours</span></div>';
+					$string .= '<div class="col-md-4 sem-badge-list sem-status"><span>Événement en cours</span></div>';
 				}
 				if ( get_field( 'event_cancel' ) ) {
-					$string .= '<div class="col-md-4 em-badge-list em-cancel"><span>Événement Annulé</span></div>';
+					$string .= '<div class="col-md-4 sem-badge-list sem-cancel"><span>Événement Annulé</span></div>';
 				}
 				$string .= '</div><div class="align-vertical-flex event-hour-list"><i class="fa fa-clock-o" aria-hidden="true"></i>';
 				if ( is_the_same_date( get_field( 'event_date_start' ), get_field( 'event_date_end' ) ) ) {
@@ -78,13 +78,13 @@ class EventManagerDisplayWidget {
 			// Aucun article disponible
 			$string .= '<li class="items">Aucun événement</li>';
 		}
-		$string .= '</ul><a class="em-link-all" href="' . site_url() . '/' . get_event_slug() . '/">Voir tout</a></div>';
+		$string .= '</ul><a class="sem-link-all" href="' . site_url() . '/' . get_event_slug() . '/">Voir tout</a></div>';
 
 		return $string;
 	}
 }
 
-new EventManagerDisplayWidget();
+new SuperEventManagerDisplayWidget();
 
 
 ?>

@@ -1,28 +1,28 @@
-.em-admin-summary {
+.sem-admin-summary {
     display: inline-flex;
     flex-direction: column;
     border: 1px solid;
     padding: 0 20px;
 }
 
-.em-admin-summary-title {
+.sem-admin-summary-title {
     margin: 10px auto;
 }
 
-.em-admin-center-text {
+.sem-admin-center-text {
     text-align: center;
 }
 
-.em-admin-flex {
+.sem-admin-flex {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.em-admin-auto {
+.sem-admin-auto {
     margin: auto;
 }
 
-.em-admin-inline {
+.sem-admin-inline {
     display: inline-block;
 }

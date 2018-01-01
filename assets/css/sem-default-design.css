@@ -11,23 +11,23 @@
     box-shadow: none;
 }
 
-.em-header {
+.sem-header {
     text-align: center;
 }
 
-.em-a,
-.em-a:focus,
-.em-a:hover {
+.sem-a,
+.sem-a:focus,
+.sem-a:hover {
     text-decoration: none !important;
     box-shadow: none !important;
     color: inherit;
 }
 
-.em-flex {
+.sem-flex {
     display: flex;
 }
 
-.em-auto {
+.sem-auto {
     margin: auto;
 }
 
@@ -40,24 +40,24 @@
     margin: auto 0;
 }
 
-.em-link-all {
+.sem-link-all {
     float: right;
     font-size: 1.6em;
 }
 
-.em-h2 {
+.sem-h2 {
     font-size: 4.5em;
 }
 
-.em-archive {
+.sem-archive {
     margin: 2vh 2vw;
 }
 
-.em-archive-title {
+.sem-archive-title {
     margin: 2vh 1vw;
 }
 
-.em-no-padding {
+.sem-no-padding {
     padding: 0;
 }
 
@@ -79,46 +79,46 @@
     height: 350px;
 }
 
-.em-slider-div,
-.em-slider-span {
+.sem-slider-div,
+.sem-slider-span {
     margin: 5px;
 }
 
-.em-h1 {
+.sem-h1 {
     font-size: 6em;
 }
 
-.em-h3 {
+.sem-h3 {
     font-size: 3em;
     margin: 0 0 0.75em;
 }
 
-.em-p {
+.sem-p {
     font-size: 1.4em;
 }
 
-.em-archive-description {
+.sem-archive-description {
     height: 3em;
 }
 
-.em-slider-img {
+.sem-slider-img {
     height: 100% !important;
 }
 
-.em-single {
+.sem-single {
     font-size: 1.4em;
 }
 
-.em-single-info {
+.sem-single-info {
     margin: 3vh 3vw;
     padding: 10px 0;
 }
 
-.em-single-head {
+.sem-single-head {
     display: flex;
 }
 
-.em-single-title {
+.sem-single-title {
     padding-left: 3vw;
     margin: auto;
 }
@@ -133,71 +133,71 @@
     height: 40%;
 }
 
-.em-calendar-select {
+.sem-calendar-select {
     margin: auto;
 }
 
-.em-calendar-select > select {
+.sem-calendar-select > select {
     width: auto;
     display: inline;
 }
 
-.em-calendar-head {
+.sem-calendar-head {
     display: flex;
     margin: 5vh 0;
 }
 
-.em-calendar {
+.sem-calendar {
     margin: 5vh 5vw;
 }
 
-.em-calendar-day {
+.sem-calendar-day {
     margin: 1vw 1vw 0 1vw;
     font-size: 1.4em;
     display: flex;
 }
 
-.em-calendar-boxday {
+.sem-calendar-boxday {
     color: #ef7b3e;
 }
 
-.em-calendar-boxday-current {
+.sem-calendar-boxday-current {
     color: #fff;
 }
 
-.em-calendar-boxday,
-.em-calendar-boxday-current {
+.sem-calendar-boxday,
+.sem-calendar-boxday-current {
     position: relative;
     min-height: 100px;
     height: 10vw
 }
 
-.em-th,
-.em-td {
+.sem-th,
+.sem-td {
     width: 10%;
     text-align: center;
 }
 
-.em-td {
+.sem-td {
     border: 1px solid #b7aaaa;
 }
 
-.em-calendar-current-day {
+.sem-calendar-current-day {
     background: #ef7b3e;
 }
 
-.em-calendar-hour {
+.sem-calendar-hour {
     font-size: 0.8em;
     margin: 5px auto;
     background: #245ad8;
     color: #fff;
 }
 
-.em-calendar-title-event {
+.sem-calendar-title-event {
     margin: auto;
 }
 
-.em-calendar-event {
+.sem-calendar-event {
     display: flex;
     flex-direction: column;
     margin-top: 5px;
@@ -286,23 +286,23 @@
 
 /*If cancelled */
 
-.em-cancel-event {
+.sem-cancel-event {
     opacity: 0.5;
 }
 
-.em-badge-list {
+.sem-badge-list {
     float: right;
     text-align: center;
     padding: 0 5px;
     border-radius: 4px;
 }
 
-.em-status {
+.sem-status {
     background-color: #238e30;
     color: #fff;
 }
 
-.em-cancel {
+.sem-cancel {
     background-color: #a20202;
     color: #fff;
 }
@@ -319,18 +319,18 @@
     Single Event
     ======================================================================= */
 
-.em-single-detail {
+.sem-single-detail {
     text-align: center;
     margin: auto;
 }
 
-.em-single-content {
+.sem-single-content {
     margin: 2vh 3vw;
 }
 
 /*If cancelled*/
 
-.em-single-cancel-info {
+.sem-single-cancel-info {
     padding: .75rem 1.25rem;
     margin: 3vh 3vw;
     border: 1px solid transparent;
@@ -340,7 +340,7 @@
     border-color: #faebcc;
 }
 
-.em-single-cancel-info > p {
+.sem-single-cancel-info > p {
     margin: 0;
     padding: 10px 20px;
 }
@@ -367,7 +367,7 @@ Page Evenement
     margin-left: 10px;
 }
 
-.em-empty {
+.sem-empty {
     margin: auto;
     font-size: 3em;
     padding: 0 20px;
@@ -403,7 +403,7 @@ Page Evenement
     margin: 0 10px;
 }
 
-.em-archive-cancel {
+.sem-archive-cancel {
     position: absolute;
     top: 20%;
     left: 50%;
@@ -448,7 +448,7 @@ Page Evenement
 
 @keyframes hvr-back-pulse {
     50% {
-        background-color: rgba(239, 123, 62, 0.75));
+        background-color: rgba(239, 123, 62, 0.75);
     }
 }
 
@@ -476,11 +476,10 @@ Page Evenement
     -webkit-animation-iteration-count: infinite;
     animation-iteration-count: infinite;
     background-color: #ef7b3e;
-    background-color: #ef7b3e;
     color: white;
 }
 
-.em-calendar-current:hover {
+.sem-calendar-current:hover {
     background-color: #fff;
     color: #ef7b3e;
 }

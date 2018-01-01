@@ -3,10 +3,10 @@
 /**
  * Classe regroupant les méthodes nécessaires à l'affichage du slider
  */
-class EventManagerDisplaySlider {
+class SuperEventManagerDisplaySlider {
 
 	/**
-	 * Constructeur de la classe EventManagerDisplaySlider
+	 * Constructeur de la classe SuperEventManagerDisplaySlider
 	 * Ajout du shortcode pour afficher le slider
 	 * @method __construct
 	 */
@@ -155,7 +155,7 @@ class EventManagerDisplaySlider {
 
 			debug_console( "row create" );
 			debug_console( $new_row );
-			debug_console( 'repaeterfield: ' . get_field( 'slider', 'options' ) );
+			debug_console( 'repeaterfield: ' . get_field( 'slider', 'options' ) );
 			debug_console( get_field( 'slider', 'options' ) );
 			$new_slide = add_row( 'slider', $new_row, 'options' );
 			debug_console( 'etat create:' );
@@ -326,6 +326,8 @@ class EventManagerDisplaySlider {
 		if ( have_rows( 'slider', 'options' ) ) {
 
 			$data_slide = 0;
+			$data_target = "";
+			$data_item = "";
 			debug_console( "get slider" );
 
 			while ( have_rows( 'slider', 'options' ) ) {
@@ -343,38 +345,38 @@ class EventManagerDisplaySlider {
 				}
 
 				if ( $data_slide == 0 ) {
-					$data_target = '<li data-target="#carousel-example-generic" data-slide-to="' . $data_slide . '" class="active"></li>';
+					$data_target .= '<li data-target="#carousel-example-generic" data-slide-to="' . $data_slide . '" class="active"></li>';
 				} else {
 					$data_target .= '<li data-target="#carousel-example-generic" data-slide-to="' . $data_slide . '"></li>';
 				}
 
 				if ( $data_slide == 0 ) {
-					$data_item = '<div class="item active">';
+					$data_item .= '<div class="item active">';
 				} else {
 					$data_item .= '<div class="item">';
 				}
 
-				$data_item .= '<img class="em-slider-img" src="' . $image['url'] . '" alt="' . $image['alt'] . '">';
+				$data_item .= '<img class="sem-slider-img" src="' . $image['url'] . '" alt="' . $image['alt'] . '">';
 
 				if ( $id ) {
-					$data_item .= '<a class="em-a" href="' . get_permalink( $id ) . '">';
+					$data_item .= '<a class="sem-a" href="' . get_permalink( $id ) . '">';
 				}
 
 				$data_item .= '
 				<div class="carousel-caption">
-					<h3 class="em-h3">' . get_sub_field( 'head' ) . '</h3>';
+					<h3 class="sem-h3">' . get_sub_field( 'head' ) . '</h3>';
 
 				if ( $id ) {
 
 					$data_item .= '
-						<div class="em-slider-div">
-							<span class="em-slider-span"><i class="fa fa-map-marker" aria-hidden="true"></i> ' . get_sub_field( 'place' ) . '</span>
-							<i class="fa fa-clock-o" aria-hidden="true"></i> <span class="em-slider-span"> ' . get_sub_field( 'date' ) . '</span>
+						<div class="sem-slider-div">
+							<span class="sem-slider-span"><i class="fa fa-map-marker" aria-hidden="true"></i> ' . get_sub_field( 'place' ) . '</span>
+							<i class="fa fa-clock-o" aria-hidden="true"></i> <span class="sem-slider-span"> ' . get_sub_field( 'date' ) . '</span>
 						</div>';
 				}
 
 				$data_item .= '
-					<div class="em-slider-div">
+					<div class="sem-slider-div">
 						<p>' . get_sub_field( 'content' ) . '</p>
 					</div>';
 
@@ -390,7 +392,7 @@ class EventManagerDisplaySlider {
 			}
 
 			$return = '
-			<div class="em-slider">
+			<div class="sem-slider">
 				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 					<!-- Indicators -->
 					<ol class="carousel-indicators">
@@ -439,11 +441,11 @@ class EventManagerDisplaySlider {
  * @return
  */
 function update_event_slider() {
-	$event_manager_display_slider = new EventManagerDisplaySlider;
+	$sem_display_slider = new SuperEventManagerDisplaySlider;
 
-	$event_manager_display_slider->update_slider_home();
+	$sem_display_slider->update_slider_home();
 }
 
-new EventManagerDisplaySlider;
+new SuperEventManagerDisplaySlider;
 
 ?>

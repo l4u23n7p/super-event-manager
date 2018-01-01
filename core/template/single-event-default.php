@@ -5,26 +5,26 @@
 		}
 		?>
     </div>
-    <div class="entry-content em-single">
-        <div class="em-single-info">
+    <div class="entry-content sem-single">
+        <div class="sem-single-info">
             <span class="date">Publié le  <a href=""><?php echo get_the_date(); ?></a></span>
         </div>
 		<?php if ( get_field( 'event_cancel' ) ): ?>
-        <div class="em-single-cancel-info">
+        <div class="sem-single-cancel-info">
 			<?php if ( get_field( 'event_cancel_reason' ) ): ?>
                 <p><strong>Événement annulé</strong> : <?php the_field( 'event_cancel_reason' ) ?></p>
 			<?php else: ?>
                 <p><strong>Événement annulé</strong></p>
 			<?php endif ?>
         </div>
-        <div class="em-cancel-event">
+        <div class="sem-cancel-event">
 			<?php endif; ?>
-            <div class="em-single-head">
-                <div class="em-single-title col-md-4">
-					<?php the_title( '<h3 class="em-h3">', '</h3>' ); ?>
+            <div class="sem-single-head">
+                <div class="sem-single-title col-md-4">
+					<?php the_title( '<h3 class="sem-h3">', '</h3>' ); ?>
                 </div>
-                <div class="em-single-detail col-md-8">
-                    <div class="em-single-detail-date col-md-6">
+                <div class="sem-single-detail col-md-8">
+                    <div class="sem-single-detail-date col-md-6">
 						<?php if ( is_the_same_date( get_field( 'event_date_start' ), get_field( 'event_date_end' ) ) ) : ?>
                             <span><i class="fa fa-clock-o"
                                      aria-hidden="true"></i> <?php the_event_date( get_field( 'event_date_start' ) ); ?></span>
@@ -40,7 +40,7 @@
                                 - <?php the_event_hour( get_field( 'event_date_end' ) ); ?></span>
 						<?php endif; ?>
                     </div>
-                    <div class="em-single-detail-place col-md-4">
+                    <div class="sem-single-detail-place col-md-4">
                         <span><i class="fa fa-map-marker"
                                  aria-hidden="true"></i> <?php the_field( 'event_place' ); ?></span>
                     </div>
@@ -48,7 +48,7 @@
             </div>
 			<?php if ( have_posts() ) : ?>
 				<?php while ( have_posts() ) : the_post(); ?>
-                    <article class="em-single-content">
+                    <article class="sem-single-content">
                         <div class="content">
 							<?php the_content(); ?>
                         </div>

@@ -12,28 +12,29 @@
 function debug_console( $args, $type = 'log' ) {
 
 	$enable_log = get_event_settings( 'display' );
+	if ( $enable_log != null ) {
+		if ( $enable_log['enable_log'] ) {
+			if ( is_array( $args ) || is_object( $args ) ) {
+				echo '<script>console.' . $type . '(' . json_encode( $args ) . ')</script>';
 
-	if ( $enable_log['enable_log'] ) {
-		if ( is_array( $args ) || is_object( $args ) ) {
-			echo '<script>console.' . $type . '(' . json_encode( $args ) . ')</script>';
-
-			return;
-		}
-		if ( is_bool( $args ) ) {
-			switch ( $args ) {
-				case true:
-					$args = 'true';
-					break;
-
-				case false:
-					$args = 'false';
-					break;
-				default:
-					# code...
-					break;
+				return;
 			}
+			if ( is_bool( $args ) ) {
+				switch ( $args ) {
+					case true:
+						$args = 'true';
+						break;
+
+					case false:
+						$args = 'false';
+						break;
+					default:
+						# code...
+						break;
+				}
+			}
+			echo '<script>console.' . $type . '("' . $args . '")</script>';
 		}
-		echo '<script>console.' . $type . '("' . $args . '")</script>';
 	}
 }
 
@@ -207,13 +208,16 @@ function the_event_hour( $entry_date ) {
 /**
  * Fonction retournant un tableau contenant tout les paramètres du plugin affiché sur la page 'Paramètres'
  * @method get_event_settings
- * @return array $meta Tableau contenant les paramètres
+ * @return null|array $meta Tableau contenant les paramètres
  */
 function get_event_settings( $name ) {
 
-	$settings = get_field( $name, 'options' );
+	if ( function_exists( 'get_field' ) ) {
 
-	return $settings;
+		return get_field( $name, 'options' );
+	}
+
+	return null;
 }
 
 /**
@@ -349,7 +353,7 @@ function update_event_status( $id ) {
 		$type   = get_post_type( $id );
 		$status = get_post_status( $id );
 
-		if ( $type = 'event' ) {
+		if ( $type == 'event' ) {
 			switch ( $status ) {
 				case 'trash':
 					debug_console( 'trash' );

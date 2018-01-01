@@ -1,5 +1,5 @@
 jQuery(function ($) {
-    $('.em-calendar-month').hide();
+    $('.sem-calendar-month').hide();
     var currentYear = $('#current_year').val();
     var currentMonth = $('#current_month').attr('value').replace('month-', '');
 

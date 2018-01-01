@@ -1,4 +1,4 @@
-# Event Manager
+# Super Event Manager
 
 ## FR
 
@@ -8,7 +8,7 @@
     
 * Description :
 
-   Event Manager est un plugin wordpress permettant de gérer des événements facilement et de les afficher de manière flexible.
+   Super Event Manager est un plugin wordpress permettant de gérer des événements facilement et de les afficher de manière flexible.
     
 
 * Fonctionalitées :
@@ -66,6 +66,12 @@
     
 #### Changelog :
 
+= 1.0.1 =
+
+* Core: Ajout de la licence
+* Core: Restructuration des fichiers
+* Settings: Réorganisation des champs
+
 = 1.0.0 =
 
 * Core:  Ajout du custom post type 'Evenement'
@@ -90,7 +96,7 @@ Contributors: Laurent-Panek
     
 * Description :
 
-   Event Manager is a wordpress plugin allowing you to easily manage events and display them flexibly.
+  Super Event Manager is a wordpress plugin allowing you to easily manage events and display them flexibly.
     
 
 * Features :
@@ -147,6 +153,12 @@ Contributors: Laurent-Panek
     
 
 #### Changelog :
+
+= 1.0.1 =
+
+* Core: Added license file
+* Core: Restructure files
+* Settings: Reorganize fields
 
 = 1.0.0 =
 

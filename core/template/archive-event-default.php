@@ -1,6 +1,6 @@
 <?php get_header(); ?>
-<header class="em-header">
-    <h1 class="entry-title em-h1"><?php the_archive_event_title() ?></h1>
+<header class="sem-header">
+    <h1 class="entry-title sem-h1"><?php the_archive_event_title() ?></h1>
     <div class="breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/">
 		<?php if ( function_exists( 'bcn_display' ) ) {
 			bcn_display();
@@ -8,9 +8,9 @@
 		?>
     </div>
 </header>
-<div class="em-archive">
-    <h2 class="em-h2 em-archive-title"><?php the_archive_event_title(); ?> en Cours</h2>
-    <div class="row em-flex">
+<div class="sem-archive">
+    <h2 class="sem-h2 sem-archive-title"><?php the_archive_event_title(); ?> en Cours</h2>
+    <div class="row sem-flex">
 		<?php
 		$event_ongoing = new WP_Query( array(
 				'post_type'   => 'event',
@@ -29,10 +29,10 @@
 					$title = utf8_encode( substr_replace( utf8_decode( $title ), ' ...', 20 ) );
 				}
 				?>
-                <div class="col-sm-6 col-md-4 hvr-grow em-auto">
-                    <a class="em-a" title="<?php the_title(); ?>" href="<?php the_permalink(); ?>">
+                <div class="col-sm-6 col-md-4 hvr-grow sem-auto">
+                    <a class="sem-a" title="<?php the_title(); ?>" href="<?php the_permalink(); ?>">
 						<?php if ( get_field( 'event_cancel' ) ): ?>
-                        <div class="thumbnail em-cancel-event">
+                        <div class="thumbnail sem-cancel-event">
 							<?php else: ?>
                             <div class="thumbnail">
 								<?php endif; ?>
@@ -40,9 +40,9 @@
 									<?php the_post_thumbnail( 'full' ); ?>
                                 </div>
                                 <div class="caption">
-                                    <h3 class="em-h3"><?php echo $title; ?></h3>
+                                    <h3 class="sem-h3"><?php echo $title; ?></h3>
 									<?php if ( get_field( 'event_cancel' ) ): ?>
-                                        <span class="em-archive-cancel em-badge-list em-cancel"><strong>Annulé</strong></span>
+                                        <span class="sem-archive-cancel sem-badge-list sem-cancel"><strong>Annulé</strong></span>
 									<?php endif; ?>
 									<?php if ( is_the_same_date( get_field( 'event_date_start' ), get_field( 'event_date_end' ) ) ) : ?>
                                         <p><i class="fa fa-calendar-o"
@@ -62,7 +62,7 @@
 									<?php endif; ?>
                                     <p><i class="fa fa-map-marker"
                                           aria-hidden="true"></i><span><?php the_field( 'event_place' ); ?></span></p>
-                                    <p class="em-archive-description"><i class="fa fa-align-left"
+                                    <p class="sem-archive-description"><i class="fa fa-align-left"
                                                                          aria-hidden="true"></i><span><?php the_field( 'event_description' ); ?></span>
                                     </p>
                                 </div>
@@ -71,13 +71,13 @@
                 </div>
 			<?php endwhile; ?>
 		<?php else: ?>
-            <div class="em-empty">
+            <div class="sem-empty">
                 <span>Aucun événement en cour</span>
             </div>
 		<?php endif; ?>
     </div>
-    <h2 class="em-h2 em-archive-title"><?php the_archive_event_title(); ?> à Venir</h2>
-    <div class="row em-flex">
+    <h2 class="sem-h2 sem-archive-title"><?php the_archive_event_title(); ?> à Venir</h2>
+    <div class="row sem-flex">
 		<?php
 		$event_upcoming = new WP_Query( array(
 				'post_type'   => 'event',
@@ -96,10 +96,10 @@
 					$title = utf8_encode( substr_replace( utf8_decode( $title ), ' ...', 20 ) );
 				}
 				?>
-                <div class="col-sm-6 col-md-4 hvr-grow em-auto">
-                    <a class="em-a" title="<?php the_title(); ?>" href="<?php the_permalink(); ?>">
+                <div class="col-sm-6 col-md-4 hvr-grow sem-auto">
+                    <a class="sem-a" title="<?php the_title(); ?>" href="<?php the_permalink(); ?>">
 						<?php if ( get_field( 'event_cancel' ) ): ?>
-                        <div class="thumbnail em-cancel-event">
+                        <div class="thumbnail sem-cancel-event">
 							<?php else: ?>
                             <div class="thumbnail">
 								<?php endif; ?>
@@ -107,9 +107,9 @@
 									<?php the_post_thumbnail( 'full' ); ?>
                                 </div>
                                 <div class="caption">
-                                    <h3 class="em-h3"><?php echo $title; ?></h3>
+                                    <h3 class="sem-h3"><?php echo $title; ?></h3>
 									<?php if ( get_field( 'event_cancel' ) ): ?>
-                                        <span class="em-archive-cancel em-badge-list em-cancel"><strong>Annulé</strong></span>
+                                        <span class="sem-archive-cancel sem-badge-list sem-cancel"><strong>Annulé</strong></span>
 									<?php endif; ?>
 									<?php if ( is_the_same_date( get_field( 'event_date_start' ), get_field( 'event_date_end' ) ) ) : ?>
                                         <p><i class="fa fa-calendar-o"
@@ -129,7 +129,7 @@
 									<?php endif; ?>
                                     <p><i class="fa fa-map-marker"
                                           aria-hidden="true"></i><span><?php the_field( 'event_place' ); ?></span></p>
-                                    <p class="em-archive-description"><i class="fa fa-align-left"
+                                    <p class="sem-archive-description"><i class="fa fa-align-left"
                                                                          aria-hidden="true"></i><span><?php the_field( 'event_description' ); ?></span>
                                     </p>
                                 </div>
@@ -138,13 +138,13 @@
                 </div>
 			<?php endwhile; ?>
 		<?php else: ?>
-            <div class="em-empty">
+            <div class="sem-empty">
                 <span>Aucun événement à venir</span>
             </div>
 		<?php endif; ?>
     </div>
-    <h2 class="em-h2 em-archive-title"><?php the_archive_event_title(); ?> Passés</h2>
-    <div class="row em-flex">
+    <h2 class="sem-h2 sem-archive-title"><?php the_archive_event_title(); ?> Passés</h2>
+    <div class="row sem-flex">
 		<?php
 		$event_past = new WP_Query( array(
 				'post_type'   => 'event',
@@ -163,10 +163,10 @@
 					$title = utf8_encode( substr_replace( utf8_decode( $title ), ' ...', 20 ) );
 				}
 				?>
-                <div class="col-sm-6 col-md-4 hvr-grow em-auto">
-                    <a class="em-a" title="<?php the_title(); ?>" href="<?php the_permalink(); ?>">
+                <div class="col-sm-6 col-md-4 hvr-grow sem-auto">
+                    <a class="sem-a" title="<?php the_title(); ?>" href="<?php the_permalink(); ?>">
 						<?php if ( get_field( 'event_cancel' ) ): ?>
-                        <div class="thumbnail em-cancel-event">
+                        <div class="thumbnail sem-cancel-event">
 							<?php else: ?>
                             <div class="thumbnail">
 								<?php endif; ?>
@@ -174,9 +174,9 @@
 									<?php the_post_thumbnail( 'full' ); ?>
                                 </div>
                                 <div class="caption">
-                                    <h3 class="em-h3"><?php echo $title; ?></h3>
+                                    <h3 class="sem-h3"><?php echo $title; ?></h3>
 									<?php if ( get_field( 'event_cancel' ) ): ?>
-                                        <span class="em-archive-cancel em-badge-list em-cancel"><strong>Annulé</strong></span>
+                                        <span class="sem-archive-cancel sem-badge-list sem-cancel"><strong>Annulé</strong></span>
 									<?php endif; ?>
 									<?php if ( is_the_same_date( get_field( 'event_date_start' ), get_field( 'event_date_end' ) ) ) : ?>
                                         <p><i class="fa fa-calendar-o"
@@ -196,7 +196,7 @@
 									<?php endif; ?>
                                     <p><i class="fa fa-map-marker"
                                           aria-hidden="true"></i><span><?php the_field( 'event_place' ); ?></span></p>
-                                    <p class="em-archive-description"><i class="fa fa-align-left"
+                                    <p class="sem-archive-description"><i class="fa fa-align-left"
                                                                          aria-hidden="true"></i><span><?php the_field( 'event_description' ); ?></span>
                                     </p>
                                 </div>
@@ -205,7 +205,7 @@
                 </div>
 			<?php endwhile; ?>
 		<?php else: ?>
-            <div class="em-empty">
+            <div class="sem-empty">
                 <span>Aucun événement passé</span>
             </div>
 		<?php endif; ?>

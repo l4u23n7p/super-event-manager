@@ -3,11 +3,11 @@
 /**
  * Classe regroupant les méthodes liées à la sauvegarde du contenu personalisé
  */
-class  EventManagerCustom
+class  SuperEventManagerCustom
 {
 
     /**
-     * Constructeur de la classe EventManagerCustom
+     * Constructeur de la classe SuperEventManagerCustom
      * Ajout de la sauvegarde des fichiers des éléments personalisable lors de la sauvegarde des paramètres
      * @method __construct
      */
@@ -59,7 +59,7 @@ class  EventManagerCustom
      */
     function save_custom_css()
     {
-        $filename = 'assets/css/event-manager-custom-design.css';
+        $filename = 'assets/css/sem-custom-design.css';
 
         $custom = get_event_settings('custom');
 
@@ -75,7 +75,7 @@ class  EventManagerCustom
      */
     function save_custom_js()
     {
-        $filename = 'assets/js/event-manager-custom-main.js';
+        $filename = 'assets/js/sem-custom-main.js';
 
         $custom = get_event_settings('custom');
 
@@ -96,9 +96,9 @@ class  EventManagerCustom
     {
         $screen = get_current_screen();
 
-        if (strpos($screen->id, "event-manager-settings") == true) {
+        if (strpos($screen->id, "sem-settings") == true) {
 
-            $filename = event_manager_get_path($file);
+            $filename = sem_get_path($file);
 
             if (is_writable($filename)) {
 
@@ -124,6 +124,6 @@ class  EventManagerCustom
 
 }
 
-new EventManagerCustom();
+new SuperEventManagerCustom();
 
 ?>
